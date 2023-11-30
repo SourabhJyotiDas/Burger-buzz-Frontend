@@ -4,7 +4,7 @@ export const getAdminStats = () => async (dispatch) => {
   try {
     dispatch({ type: "getDashboardStatsRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/stats`);
+    const { data } = await axios.get(`/api/v1/admin/stats`, { withCredentials: true });
 
     dispatch({ type: "getDashboardStatsSuccess", payload: data });
   } catch (error) {
@@ -21,7 +21,7 @@ export const getAdminUsers = () => async (dispatch) => {
   try {
     dispatch({ type: "getAdminUsersRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/users`);
+    const { data } = await axios.get(`/api/v1/admin/users`, { withCredentials: true });
 
     dispatch({ type: "getAdminUsersSuccess", payload: data.users });
   } catch (error) {
@@ -36,7 +36,7 @@ export const getAdminOrders = () => async (dispatch) => {
   try {
     dispatch({ type: "getAdminOrdersRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/orders`);
+    const { data } = await axios.get(`/api/v1/admin/orders`, { withCredentials: true });
 
     dispatch({ type: "getAdminOrdersSuccess", payload: data.orders });
   } catch (error) {
@@ -51,7 +51,7 @@ export const processOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: "processOrderRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/order/${id}`);
+    const { data } = await axios.get(`/api/v1/admin/order/${id}`, { withCredentials: true });
 
     dispatch({ type: "processOrderSuccess", payload: data.message });
   } catch (error) {

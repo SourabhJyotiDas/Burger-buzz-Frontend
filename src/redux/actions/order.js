@@ -1,4 +1,5 @@
 import axios from "axios";
+import { server } from "../store";
 
 export const createOrder = (shippingInfo, orderItems, paymentMethod, itemsPrice, taxPrice, shippingCharges, totalAmount) =>
   async (dispatch) => {
@@ -7,11 +8,12 @@ export const createOrder = (shippingInfo, orderItems, paymentMethod, itemsPrice,
         type: "createOrderRequest",
       });
 
-      const { data } = await axios.post(`/api/v1/createorder`, { shippingInfo, orderItems, paymentMethod, itemsPrice, taxPrice, shippingCharges, totalAmount, },
+      const { data } = await axios.post(`${server}/createorder`, { shippingInfo, orderItems, paymentMethod, itemsPrice, taxPrice, shippingCharges, totalAmount, },
         {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials:true
         }
       );
 
@@ -36,7 +38,7 @@ export const paymentVerification = (razorpay_payment_id, razorpay_order_id, razo
         type: "paymentVerificationRequest",
       });
 
-      const { data } = await axios.post(`/api/v1/paymentverification`,
+      const { data } = await axios.post(`${server}/paymentverification`,
         {
           razorpay_payment_id,
           razorpay_order_id,
@@ -46,7 +48,8 @@ export const paymentVerification = (razorpay_payment_id, razorpay_order_id, razo
         {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
+          withCredentials:true
         }
       );
 
@@ -66,7 +69,7 @@ export const getMyOrders = () => async (dispatch) => {
   try {
     dispatch({ type: "getMyOrdersRequest" });
 
-    const { data } = await axios.get(`/api/v1/myorders`);
+    const { data } = await axios.get(`${server}/myorders`,{withCredentials:true});
 
     dispatch({ type: "getMyOrdersSuccess", payload: data.orders });
   } catch (error) {
@@ -78,7 +81,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: "getOrderDetailsRequest" });
 
-    const { data } = await axios.get(`/api/v1/order/${id}`);
+    const { data } = await axios.get(`${server}/order/${id}`,{withCredentials:true});
 
     dispatch({ type: "getOrderDetailsSuccess", payload: data.order });
 

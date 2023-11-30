@@ -16,4 +16,4 @@ const store = configureStore({
 
 export default store;
 
-export const server = "https://vercel.com/sourabhjyotidas/burger-buzz-backend";
+export const server = "https://burgerbuzz.vercel.app/api/v1";

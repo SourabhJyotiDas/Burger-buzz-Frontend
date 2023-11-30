@@ -9,11 +9,12 @@ export const loginUser = (email, password) => async (dispatch) => {
       type: "LoginRequest",
     });
 
-    const { data } = await axios.post(`/api/v1/login`, { email, password },
+    const { data } = await axios.post(`${server}/login`, { email, password },
       {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true
       }
     );
 
@@ -36,7 +37,7 @@ export const loadUser = () => async (dispatch) => {
       type: "loadUserRequest",
     });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`${server}/me`,{withCredentials:true});
 
     dispatch({
       type: "loadUserSuccess",
@@ -50,31 +51,32 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-export const registerUser =(name, email, password, avatar) => async (dispatch) => {
-    try {
-      dispatch({
-        type: "RegisterRequest",
-      });
+export const registerUser = (name, email, password, avatar) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "RegisterRequest",
+    });
 
-      const { data } = await axios.post(`/api/v1/register`,{ name, email, password, avatar },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const { data } = await axios.post(`${server}/register`, { name, email, password, avatar },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials:true
+      }
+    );
 
-      dispatch({
-        type: "RegisterSuccess",
-        payload: data.user,
-      });
-    } catch (error) {
-      dispatch({
-        type: "RegisterFailure",
-        payload: error.response.data.message,
-      });
-    }
-  };
+    dispatch({
+      type: "RegisterSuccess",
+      payload: data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: "RegisterFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
 
 export const logout = () => async (dispatch) => {
   try {
@@ -82,7 +84,7 @@ export const logout = () => async (dispatch) => {
       type: "logoutRequest",
     });
 
-    const { data } = await axios.get(`/api/v1/logout`);
+    const { data } = await axios.get(`${server}/logout`,{withCredentials:true});
 
     dispatch({
       type: "logoutSuccess",

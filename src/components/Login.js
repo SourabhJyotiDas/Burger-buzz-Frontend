@@ -7,7 +7,7 @@ import Loader from "../components/layouts/Loader"
 
 export default function Login() {
 
-    const { error, isAuthenticated, loading, message, user } = useSelector(state => state.auth)
+    const { error,  loading, message } = useSelector(state => state.auth)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

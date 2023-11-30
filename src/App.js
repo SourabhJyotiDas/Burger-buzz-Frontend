@@ -1,38 +1,38 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home"
-import Navbar from "./components/layouts/Navbar"
-import Footer from "./components/layouts/Footer"
-import Contact from './components/Contact';
-import Cart from './components/Cart';
-import Profile from './components/Profile';
-import Shipping from './components/Shipping';
-import ConfirmOrder from './components/Confirmorder';
-import Paymentsuccess from './components/Paymentsuccess';
-import Login from './components/Login';
-import Register from './components/Register';
-import OrderDetails from './components/OrderDetails';
-import MyOrders from './components/MyOrders';
-import Dashboard from './components/admin/Dashboard';
-import Users from './components/admin/Users';
-import Orders from './components/admin/Orders';
-import About from './components/About';
-import Notfound from './components/layouts/Notfound';
 import { useEffect } from 'react';
-import { loadUser } from './redux/actions/user';
-import { useDispatch, useSelector } from "react-redux"
-import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+import About from './components/About';
+import Cart from './components/Cart';
+import ConfirmOrder from './components/Confirmorder';
+import Contact from './components/Contact';
+import Home from "./components/Home";
+import Login from './components/Login';
+import MyOrders from './components/MyOrders';
+import OrderDetails from './components/OrderDetails';
+import Paymentsuccess from './components/Paymentsuccess';
+import Profile from './components/Profile';
+import Register from './components/Register';
+import Shipping from './components/Shipping';
+import Dashboard from './components/admin/Dashboard';
+import Orders from './components/admin/Orders';
+import Users from './components/admin/Users';
+import Footer from "./components/layouts/Footer";
+import Navbar from "./components/layouts/Navbar";
+import Notfound from './components/layouts/Notfound';
+import { loadUser } from './redux/actions/user';
 
 function App() {
   const dispatch = useDispatch();
 
-  const { error, isAuthenticated, loading, message, user } = useSelector(state => state.auth)
+  const { isAuthenticated, user } = useSelector(state => state.auth)
 
 
   useEffect(() => {
     dispatch(loadUser())
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -54,10 +54,10 @@ function App() {
           <Route exact path={'/me'} element={isAuthenticated ? <Profile /> : <Login />} />
           <Route exact path={'/myorders'} element={isAuthenticated ? <MyOrders /> : <Login />} />
           <Route exact path={'/order/:id'} element={isAuthenticated ? <OrderDetails /> : <Login />} />
-          
+
           <Route exact path={'/admin/dashboard'} element={isAuthenticated && user.role === "admin" ? <Dashboard /> : <Login />} />
-          <Route exact path={'/admin/users'} element={isAuthenticated && user.role === "admin"  ? <Users /> : <Login />} />
-          <Route exact path={'/admin/orders'} element={isAuthenticated && user.role === "admin"  ? <Orders /> : <Login />} />
+          <Route exact path={'/admin/users'} element={isAuthenticated && user.role === "admin" ? <Users /> : <Login />} />
+          <Route exact path={'/admin/orders'} element={isAuthenticated && user.role === "admin" ? <Orders /> : <Login />} />
 
 
 

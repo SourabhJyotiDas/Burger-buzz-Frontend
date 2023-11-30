@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
-import { createOrder, paymentVerification } from '../redux/actions/order';
-import { toast } from 'react-toastify';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { createOrder, paymentVerification } from '../redux/actions/order';
 
 export default function Confirmorder() {
     // shippingInfo,
@@ -46,8 +46,7 @@ export default function Confirmorder() {
                     },
                 }
             );
-            // console.log(order);
-            // console.log(orderOptions);
+          
 
             const options = {
                 key: "rzp_test_hB7LIUIZZnALWu",

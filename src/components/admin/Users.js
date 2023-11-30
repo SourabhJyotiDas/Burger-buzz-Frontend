@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import me from "../../assets/founder.jpeg"
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminUsers } from '../../redux/actions/admin';
 import Loader from '../layouts/Loader';

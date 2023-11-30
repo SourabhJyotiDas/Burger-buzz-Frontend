@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Box from "../layouts/Box.js";
 import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, Tooltip, ArcElement, Legend } from "chart.js"
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminStats } from '../../redux/actions/admin.js';
 import Loader from "../layouts/Loader"
 
+import { Chart as ChartJS, Tooltip, ArcElement, Legend } from "chart.js"
 ChartJS.register(Tooltip, ArcElement, Legend)
 
 export default function Dashboard() {
